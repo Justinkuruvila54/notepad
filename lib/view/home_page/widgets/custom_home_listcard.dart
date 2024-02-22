@@ -4,7 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:notepad/utils/color_constants.dart';
 
 class Customhomecard extends StatefulWidget {
-  const Customhomecard({super.key});
+  const Customhomecard(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.date,
+      required this.colorlist,
+      this.onpresseddelete});
+  final String title;
+  final String description;
+  final String date;
+  final Color colorlist;
+  final void Function()? onpresseddelete;
 
   @override
   State<Customhomecard> createState() => _CustomhomecardState();
@@ -15,10 +26,9 @@ class _CustomhomecardState extends State<Customhomecard> {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-        
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colorconstants.textcolor,
+          color:widget.colorlist,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -29,7 +39,7 @@ class _CustomhomecardState extends State<Customhomecard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Tittle",
+                    widget.title,
                     style: TextStyle(fontSize: 20),
                   ),
                   Row(
@@ -49,7 +59,7 @@ class _CustomhomecardState extends State<Customhomecard> {
               child: Row(
                 children: [
                   Text(
-                    "description",
+                    widget.description,
                     style: TextStyle(fontSize: 18),
                   ),
                 ],
@@ -61,7 +71,7 @@ class _CustomhomecardState extends State<Customhomecard> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "date",
+                    widget.date,
                     style: TextStyle(fontSize: 15),
                   ),
                   SizedBox(

@@ -1,27 +1,29 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:notepad/controller/home_screen_controller.dart';
 import 'package:notepad/utils/color_constants.dart';
 import 'package:notepad/utils/color_database.dart';
 
-class Bottomsheetcustomcard extends StatefulWidget {
-  const Bottomsheetcustomcard({super.key});
+class Bottomsheetcustomcard extends StatelessWidget {
+  Bottomsheetcustomcard({
+    super.key,
+    this.onsavepressed,
+  });
 
-  @override
-  State<Bottomsheetcustomcard> createState() => _BottomsheetcustomcardState();
-}
+  Homescreencontroller homecontrolerobj = Homescreencontroller();
 
-class _BottomsheetcustomcardState extends State<Bottomsheetcustomcard> {
   int slectedindex = 0;
+  final void Function()? onsavepressed;
+
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(
-      
       builder: (context, bottomsetState) => Container(
-        decoration: BoxDecoration(color: Colorconstants.lightgreen,borderRadius: BorderRadius.circular(10)),
-        child: Column(
-          
-          children: [
+        decoration: BoxDecoration(
+            color: Colorconstants.lightgreen,
+            borderRadius: BorderRadius.circular(10)),
+        child: Column(children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
@@ -87,13 +89,16 @@ class _BottomsheetcustomcardState extends State<Bottomsheetcustomcard> {
                     itemBuilder: (context, index) => InkWell(
                           onTap: () {
                             slectedindex = index;
-                            
-                          bottomsetState(() {});
+
+                            bottomsetState(() {});
                           },
-                          child: Container(
-                            height: index == slectedindex ? 60: 40,
-                            width: index == slectedindex ? 60: 40,
-                            decoration: BoxDecoration(color: Colordatabase.colorlist[index]),
+                          child: Center(
+                            child: Container(
+                              height: index == slectedindex ? 60 : 40,
+                              width: index == slectedindex ? 60 : 40,
+                              decoration: BoxDecoration(
+                                  color: Colordatabase.colorlist[index]),
+                            ),
                           ),
                         ),
                     separatorBuilder: (context, index) => SizedBox(
@@ -117,10 +122,19 @@ class _BottomsheetcustomcardState extends State<Bottomsheetcustomcard> {
                 width: 10,
               ),
               Expanded(
-                  child: Container(
-                      height: 50,
-                      color: Colors.grey,
-                      child: Center(child: Text("save"))))
+                  child: InkWell(
+                onTap: () {
+                  onsavepressed!();
+                  Navigator.pop(context);
+                },
+
+                //Navigator.pop(context);
+
+                child: Container(
+                    height: 50,
+                    color: Colors.grey,
+                    child: Center(child: Text("save"))),
+              ))
             ],
           )
         ]),
