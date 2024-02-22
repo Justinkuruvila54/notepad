@@ -1,10 +1,11 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, non_constant_identifier_names, must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:notepad/controller/home_screen_controller.dart';
 import 'package:notepad/utils/color_constants.dart';
 
 class Customhomecard extends StatefulWidget {
-  const Customhomecard(
+  Customhomecard(
       {super.key,
       required this.title,
       required this.description,
@@ -17,6 +18,7 @@ class Customhomecard extends StatefulWidget {
   final Color colorlist;
   final void Function()? onpresseddelete;
 
+  Homescreencontroller homecontrolerobj = Homescreencontroller();
   @override
   State<Customhomecard> createState() => _CustomhomecardState();
 }
@@ -28,7 +30,7 @@ class _CustomhomecardState extends State<Customhomecard> {
       Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color:widget.colorlist,
+          color: widget.colorlist,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -48,7 +50,14 @@ class _CustomhomecardState extends State<Customhomecard> {
                       SizedBox(
                         width: 15,
                       ),
-                      Icon(Icons.delete)
+                      InkWell(
+                          onTap: () {
+                            widget.onpresseddelete!();
+                            setState(() {
+                              
+                            });
+                          },
+                          child: Icon(Icons.delete))
                     ],
                   )
                 ],

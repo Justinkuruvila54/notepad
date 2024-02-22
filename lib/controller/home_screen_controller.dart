@@ -18,4 +18,8 @@ class Homescreencontroller {
       "color": Colors.red
     });
   }
+
+  void deletedata(int index) {
+    notelist.removeAt(index);
+  }
 }

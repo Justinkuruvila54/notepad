@@ -43,6 +43,10 @@ class _HomescreenState extends State<Homescreen> {
                     description: homecontrolerobj.notelist[index]["des"],
                     date: homecontrolerobj.notelist[index]["date"],
                     colorlist: homecontrolerobj.notelist[index]["color"],
+                    onpresseddelete: () {
+                      homecontrolerobj.deletedata(index);
+                      setState(() {});
+                    },
                   ),
               separatorBuilder: (context, index) => SizedBox(
                     height: 10,
@@ -60,9 +64,7 @@ class _HomescreenState extends State<Homescreen> {
                   child: Bottomsheetcustomcard(
                     onsavepressed: () {
                       homecontrolerobj.adddata();
-                      setState(() {
-                        
-                      });
+                      setState(() {});
                     },
                   )));
         },
